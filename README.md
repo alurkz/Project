@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # M117 Project: SerendiBuddy
 ## Members: Kevin Qian, Qianmeng Chen, Alex Albanna
 
@@ -36,3 +37,9 @@
 +	Kevin Qian: Project Manager/Director, Framework Architecture, Implementer
 +	Qianmeng Chen: Database Management, Interface Design, Implementer
 +	Alex Albanna: Media Processing, Network Incorporation, Implementer
+=======
+# Project
+LALALA
+
+YOYOYO
+>>>>>>> origin/master
