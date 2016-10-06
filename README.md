@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # M117 Project: SerendiBuddy
 ## Members: Kevin Qian, Qianmeng Chen, Alex Albanna
 
