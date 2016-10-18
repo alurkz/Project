@@ -19,6 +19,7 @@
 		257804671DB08A38009540AF /* PrototypeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257804661DB08A38009540AF /* PrototypeUITests.swift */; };
 		2578047B1DB08D9E009540AF /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = 2578047A1DB08D9E009540AF /* Icons */; };
 		2578047D1DB09155009540AF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578047C1DB09155009540AF /* SettingsViewController.swift */; };
+		FA5176771DB6D380002A1674 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5176761DB6D380002A1674 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		257804681DB08A38009540AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2578047A1DB08D9E009540AF /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		2578047C1DB09155009540AF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FA5176761DB6D380002A1674 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5176771DB6D380002A1674 /* CoreLocation.framework in Frameworks */,
 				254F74951DB6CFDD0052C688 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +91,7 @@
 		254F74931DB6CFDD0052C688 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA5176761DB6D380002A1674 /* CoreLocation.framework */,
 				254F74941DB6CFDD0052C688 /* MapKit.framework */,
 			);
 			name = Frameworks;
