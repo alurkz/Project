@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     
     
     @IBOutlet weak var o_tf_msgTextField: UITextField!
@@ -22,7 +22,7 @@ class MapViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        o_tf_msgTextField.state
+        //o_tf_msgTextField.state
     }
 
     override func didReceiveMemoryWarning() {
