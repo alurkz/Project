@@ -18,15 +18,14 @@
 		2578045C1DB08A38009540AF /* PrototypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578045B1DB08A38009540AF /* PrototypeTests.swift */; };
 		257804671DB08A38009540AF /* PrototypeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257804661DB08A38009540AF /* PrototypeUITests.swift */; };
 		2578047D1DB09155009540AF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578047C1DB09155009540AF /* SettingsViewController.swift */; };
-
-
-
+<<<<<<< HEAD
+=======
 		25DB7C611DB6F745004DEE44 /* map_textfield_toggle.png in Resources */ = {isa = PBXBuildFile; fileRef = 25DB7C601DB6F745004DEE44 /* map_textfield_toggle.png */; };
 		25DB7C651DB6F76D004DEE44 /* tab_icon_explore.png in Resources */ = {isa = PBXBuildFile; fileRef = 25DB7C621DB6F76D004DEE44 /* tab_icon_explore.png */; };
 		25DB7C661DB6F76D004DEE44 /* tab_icon_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 25DB7C631DB6F76D004DEE44 /* tab_icon_map.png */; };
 		25DB7C671DB6F76D004DEE44 /* tab_icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 25DB7C641DB6F76D004DEE44 /* tab_icon_settings.png */; };
 		25DB7C6B1DB6FB29004DEE44 /* map_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 25DB7C6A1DB6FB29004DEE44 /* map_send.png */; };
-
+>>>>>>> d0cd0745cd665efa49d0a465fea73b625e2ecc6a
 		FA5176771DB6D380002A1674 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5176761DB6D380002A1674 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,15 +64,14 @@
 		257804661DB08A38009540AF /* PrototypeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeUITests.swift; sourceTree = "<group>"; };
 		257804681DB08A38009540AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2578047C1DB09155009540AF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-
-
+<<<<<<< HEAD
+=======
 		25DB7C601DB6F745004DEE44 /* map_textfield_toggle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_textfield_toggle.png; sourceTree = "<group>"; };
 		25DB7C621DB6F76D004DEE44 /* tab_icon_explore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_icon_explore.png; sourceTree = "<group>"; };
 		25DB7C631DB6F76D004DEE44 /* tab_icon_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_icon_map.png; sourceTree = "<group>"; };
 		25DB7C641DB6F76D004DEE44 /* tab_icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_icon_settings.png; sourceTree = "<group>"; };
 		25DB7C6A1DB6FB29004DEE44 /* map_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_send.png; sourceTree = "<group>"; };
-
-
+>>>>>>> d0cd0745cd665efa49d0a465fea73b625e2ecc6a
 		FA5176761DB6D380002A1674 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
