@@ -12,9 +12,36 @@ import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     
+    
+    private func mapView(mapView: MKMapView!,
+                 viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        if annotation is MKUserLocation {
+            //return nil so map view draws "blue dot" for standard user location
+            return nil
+        }
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)! as MKAnnotationView
+        if pinView == nil {
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView.canShowCallout = true
+            pinView.image = UIImage(named:"map_send.png")!
+            
+        }
+        else {
+            pinView.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    
     @IBOutlet var map: MKMapView!
     
     @IBOutlet var o_tf_msgTextField: UITextField!
+    
+    var userLocation: CLLocation!
 
     
     /////////////////////////////////
@@ -84,14 +111,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
     }
     //send button
     @IBAction func a_bt_send(_ sender: AnyObject) {
-        sendMessage()
-        
-        o_tf_msgTextField.text = ""
+        if !((o_tf_msgTextField.text?.isEmpty)!) {
+            sendMessage()
+            o_tf_msgTextField.text = ""
+        }
     }
     
     //TODO: Implement this
     func sendMessage() {
-        
+        addToMap();
     }
     
     
@@ -115,17 +143,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
         
         
         /* LONG PRESS */
+        /*
         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPressAddContent(gestureRecognizer:)))
         
         uilpgr.minimumPressDuration = 2
         
         map.addGestureRecognizer(uilpgr)
+        */
         
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let userLocation: CLLocation = locations[0]
+        userLocation = locations[0]
         
         setMap(userLocation: userLocation)
         
@@ -147,41 +177,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
         
     }
     
-    func longPressAddContent(gestureRecognizer: UIGestureRecognizer) {
-        
-        
-        //let name = textFromTextBox()
-        
-//        let touchPoint = gestureRecognizer.location(in: self.map)
-//        
-//        let coordinate = map.convert(touchPoint, toCoordinateFrom: self.map)
-//        
-//        let annotation = MKPointAnnotation()
-//        
-//        annotation.coordinate = coordinate
-//        
-//        annotation.title = name
-//        
-//        annotation.subtitle = "Maybe I'll go here too.."
-//        
-//        map.addAnnotation(annotation)
-
-        
+    
+    func addToMap() {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = userLocation.coordinate
+        annotation.title = o_tf_msgTextField.text!
+        o_tf_msgTextField.text = "";
+        map.addAnnotation(annotation)
     }
     
-    /*
-    func textFromTextBox() -> String {
-        
-        o_tf_msgTextField.isHidden = false
-        
-        //var enteredText = ""
-        
-        let enteredText = o_tf_msgTextField.text!
-        
-        return enteredText
-        
-    }
-     */
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         endTextfieldEditing()
