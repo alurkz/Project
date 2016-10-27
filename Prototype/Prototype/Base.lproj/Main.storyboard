@@ -34,19 +34,39 @@
                                 <frame key="frameInset" minY="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hOw-JI-MYE">
-                                <frame key="frameInset" minX="74" minY="563" width="227" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJV-KR-NgV">
+                                <frame key="frameInset" minX="17" minY="543" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="map_textfield_toggle.png"/>
+                                <connections>
+                                    <action selector="a_bt_popTextField:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Q4p-tI-SIR"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's up?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wj2-M2-y41">
+                                <frame key="frameInset" minX="81" minY="552" width="213" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="twitter"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZm-vt-f9M">
+                                <frame key="frameInset" minX="310" minY="551" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                <state key="normal" backgroundImage="map_send.png"/>
+                                <connections>
+                                    <action selector="a_bt_send:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Sed-b6-DST"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="tab_icon_map.png" selectedImage="tab_icon_map.png" id="acW-dT-cKf"/>
                     <connections>
-                        <outlet property="o_tf_msgTextField" destination="hOw-JI-MYE" id="DcS-4m-voX"/>
+                        <outlet property="map" destination="VdD-3h-VeQ" id="SWI-EH-jIZ"/>
+                        <outlet property="o_bt_popTextField" destination="eJV-KR-NgV" id="XMC-DC-F6E"/>
+                        <outlet property="o_bt_send" destination="CZm-vt-f9M" id="PfD-r1-8gj"/>
+                        <outlet property="o_tf_msgTextField" destination="Wj2-M2-y41" id="77J-Re-vqi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -175,6 +195,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="map_send.png" width="52" height="52"/>
+        <image name="map_textfield_toggle.png" width="50" height="50"/>
         <image name="tab_icon_explore.png" width="30" height="30"/>
         <image name="tab_icon_map.png" width="30" height="30"/>
         <image name="tab_icon_settings.png" width="30" height="30"/>
