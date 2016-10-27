@@ -14,7 +14,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
     
     
     private func mapView(mapView: MKMapView!,
-                         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+                 viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
@@ -42,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
     @IBOutlet var o_tf_msgTextField: UITextField!
     
     var userLocation: CLLocation!
-    
+
     
     /////////////////////////////////
     //Region: Text field/Send Management
@@ -144,12 +144,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
         
         /* LONG PRESS */
         /*
-         let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPressAddContent(gestureRecognizer:)))
-         
-         uilpgr.minimumPressDuration = 2
-         
-         map.addGestureRecognizer(uilpgr)
-         */
+        let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPressAddContent(gestureRecognizer:)))
+        
+        uilpgr.minimumPressDuration = 2
+        
+        map.addGestureRecognizer(uilpgr)
+        */
         
     }
     
@@ -256,6 +256,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
             })
         }
     }
-    
+
 }
 
