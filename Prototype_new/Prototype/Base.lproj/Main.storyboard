@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -34,10 +34,6 @@
                                 <frame key="frameInset" minY="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-<<<<<<< HEAD
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wj2-M2-y41">
-                                <frame key="frameInset" minX="81" minY="548" width="213" height="30"/>
-=======
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJV-KR-NgV">
                                 <frame key="frameInset" minX="17" minY="543" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -48,7 +44,6 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's up?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wj2-M2-y41">
                                 <frame key="frameInset" minX="81" minY="552" width="213" height="30"/>
->>>>>>> d0cd0745cd665efa49d0a465fea73b625e2ecc6a
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -69,11 +64,8 @@
                     <tabBarItem key="tabBarItem" title="Map" image="tab_icon_map.png" selectedImage="tab_icon_map.png" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="map" destination="VdD-3h-VeQ" id="SWI-EH-jIZ"/>
-<<<<<<< HEAD
-=======
                         <outlet property="o_bt_popTextField" destination="eJV-KR-NgV" id="XMC-DC-F6E"/>
                         <outlet property="o_bt_send" destination="CZm-vt-f9M" id="PfD-r1-8gj"/>
->>>>>>> d0cd0745cd665efa49d0a465fea73b625e2ecc6a
                         <outlet property="o_tf_msgTextField" destination="Wj2-M2-y41" id="77J-Re-vqi"/>
                     </connections>
                 </viewController>
