@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Parse
 
 class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     
@@ -117,10 +118,82 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
         }
     }
     
-    //TODO: Implement this
-    func sendMessage() {
-        addToMap();
+    
+    func addToMap(object: PFObject) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: object["Latitude"] as! CLLocationDegrees, longitude: object["Longitude"] as! CLLocationDegrees)
+        annotation.title = object["Message"] as! String
+        
+        map.addAnnotation(annotation)
     }
+    
+    func refreshMessages(){
+        var receivedMessages = [PFObject]()
+        let query = PFQuery(className: "Messages")
+        query.findObjectsInBackground { (objects, error) -> Void in
+            if objects != nil {
+                
+                for object in objects! as [PFObject] {
+                    
+                    if self.userLocation.distance(from: CLLocation(latitude: object["Latitude"] as! CLLocationDegrees, longitude: object["Longitude"] as! CLLocationDegrees)) <= 10.0  {
+                        
+                        receivedMessages.append(object)
+                        self.addToMap(object: object)
+                    }
+                    
+                }
+                
+                
+            } else {
+                
+                if error != nil {
+                    
+                    print (error)
+                    
+                } else {
+                    
+                    print ("Error!")
+                    
+                }
+            }
+        }
+        
+        //return receivedMessages
+    }
+    
+    func sendMessage() {
+        let newMessage = PFObject(className: "Messages")
+        newMessage["Message"] = o_tf_msgTextField.text!
+        newMessage["Latitude"] = userLocation.coordinate.latitude
+        newMessage["Longitude"] = userLocation.coordinate.longitude
+        newMessage.saveInBackground { (success, error) -> Void in
+            if success {
+                
+                print("Object has been saved.")
+                
+            } else {
+                
+                if error != nil {
+                    
+                    print (error)
+                    
+                } else {
+                    
+                    print ("Error")
+                }
+                
+            }
+        }
+        //addToMap();
+        refreshMessages()
+        o_tf_msgTextField.text = "";
+        /*if TestMessages.count > 0 {
+         o_tf_msgTextField.text = TestMessages[0]["Message"] as! String + " Received!"
+         }*/
+    }
+    
+    
+    var refreshTimer : Timer = Timer();
     
     
     /////////////////////////////////
@@ -128,30 +201,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
     /////////////////////////////////
     var locationManager = CLLocationManager()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
-        //o_tf_msgTextField.isHidden = true
-        
-        /* GPS STUFF */
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        
-        /* LONG PRESS */
-        /*
-        let uilpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.longPressAddContent(gestureRecognizer:)))
-        
-        uilpgr.minimumPressDuration = 2
-        
-        map.addGestureRecognizer(uilpgr)
-        */
-        
-    }
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -177,14 +227,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
         
     }
     
-    
+    /*
     func addToMap() {
         let annotation = MKPointAnnotation()
         annotation.coordinate = userLocation.coordinate
         annotation.title = o_tf_msgTextField.text!
+        
         o_tf_msgTextField.text = "";
         map.addAnnotation(annotation)
     }
+     */
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -201,18 +253,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
         
         return true
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        init_textfield()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     var isKeyboardShown = false
@@ -255,6 +295,93 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegat
                 self.o_bt_send.frame = CGRect(x: 310, y: 551, width: 35, height: 35)
             })
         }
+    }
+    
+    
+    func setupNotificationSettings() {
+        let notificationSettings: UIUserNotificationSettings! = UIApplication.shared.currentUserNotificationSettings
+        
+        if (notificationSettings.types == []){
+            // Specify the notification types.
+            let notificationTypes: UIUserNotificationType = [.alert, .sound, .badge];
+            
+            // Specify the notification actions.
+            let notification = UIMutableUserNotificationAction()
+            notification.identifier = "notify"
+            notification.title = "New Message"
+            notification.activationMode = UIUserNotificationActivationMode.background
+            notification.isDestructive = true
+            notification.isAuthenticationRequired = false
+            
+            let actionsArray = NSArray(objects: notification)
+            //let actionsArrayMinimal = NSArray(objects: trashAction, modifyListAction)
+            
+            // Specify the category related to the above actions.
+            let notificationCategory = UIMutableUserNotificationCategory()
+            notificationCategory.identifier = "notifyCategory"
+            notificationCategory.setActions(actionsArray as? [UIUserNotificationAction], for: UIUserNotificationActionContext.default)
+            
+            let categoriesForSettings = NSSet(objects: notificationCategory)
+            
+            // Register the notification settings.
+            let newNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: categoriesForSettings as? Set<UIUserNotificationCategory>)
+            UIApplication.shared.registerUserNotificationSettings(newNotificationSettings)
+        }
+    }
+    
+    func scheduleLocal() {
+        let notification = UILocalNotification()
+        notification.fireDate = Date(timeIntervalSinceNow: -25199)
+        notification.alertBody = "Hey you! Yeah you! Swipe to unlock!"
+        notification.alertAction = "be awesome!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["CustomField1": "w00t"]
+        UIApplication.shared.scheduleLocalNotification(notification)
+        
+        /*
+        guard let settings = UIApplication.shared.currentUserNotificationSettings else { return }
+        
+        if settings.types == .none {
+            let ac = UIAlertController(title: "Can't schedule", message: "Either we don't have permission to schedule notifications, or we haven't asked yet.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
+            return
+        }
+ */
+    }
+    
+    
+    var notifyTimer: Timer = Timer();
+    override func viewDidAppear(_ animated: Bool) {
+        init_textfield()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        //o_tf_msgTextField.isHidden = true
+        
+        /* GPS STUFF */
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        setupNotificationSettings();
+        notifyTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(scheduleLocal), userInfo: nil, repeats: true)
+        
+        refreshTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(refreshMessages), userInfo: nil, repeats: true)
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 }

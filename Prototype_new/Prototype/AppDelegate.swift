@@ -17,6 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        Parse.enableLocalDatastore()
+        
+        let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
+            ParseMutableClientConfiguration.applicationId = "834febce22b056b6938151924f6657caa2d3a42b"
+            ParseMutableClientConfiguration.clientKey = "5149f835023e4fee4cd00f99600ff2f0885dfa22"
+            ParseMutableClientConfiguration.server = "http://ec2-35-162-132-47.us-west-2.compute.amazonaws.com:80/parse"
+        })
+        
+        Parse.initialize(with: parseConfiguration)
+        
+        
+        //Register for notification
+        //registerForPushNotifications(application: application)
+        //DO NOT move the line above. This is used for notification settings
+        
+        
+        
+        
         // Override point for customization after application launch.
         //@@@Parse.enableLocalDatastore()
         
@@ -117,5 +136,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+        /*
+    func registerForPushNotifications(application: UIApplication) {
+        let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        application.registerUserNotificationSettings(notificationSettings)
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        if notificationSettings.types != .None {
+            application.registerForRemoteNotifications()
+        }
+    }
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+        var tokenString = ""
+        
+        for i in 0..<deviceToken.length {
+            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+        }
+        
+        print("Device Token:", tokenString)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Failed to register:", error)
+    }
+ */
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        let notificationTypes: UIUserNotificationType = [.alert, .sound, .badge];
+        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil);
+        
+        application.registerUserNotificationSettings(pushNotificationSettings);
+        application.registerForRemoteNotifications();
+        return true;
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("DEVICE TOKEN = XXX");
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error);
+    }
+    
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        ///
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print(userInfo);
+    }
 }
-
